@@ -1,0 +1,15 @@
+{
+    "name" : "example_project",
+    "version":"0.1.0",
+    "description":"Something to show off hump",
+    "keywords":["build", "systems"],
+    "author":{
+	"name":"Edgar Aroutiounian",
+	"email":"edgar.factorial@gmail.com"
+    },
+    "dependencies":{
+	"cmdliner":"*",
+	"lwt":"*"
+    },
+    "license":"GPL-3"
+}
