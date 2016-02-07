@@ -2,8 +2,8 @@
 
 .PHONY:all clean
 
-flags := -shared -undefined dynamic_lookup -fPIC
-libs := -lc++
+flags := -shared -undefined dynamic_lookup -fPIC -std=c++14
+libs := -lc++ -lfolly
 src := hump.cpp
 lib := hump.so
 

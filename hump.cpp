@@ -1,5 +1,8 @@
 #include <cstdio>
 #include <iostream>
+#include <memory>
+
+#include <folly/json.h>
 
 class FileBuilder {
 public:
@@ -16,15 +19,18 @@ extern "C" {
 
   int plugin_is_GPL_compatible;
 
-  char *generate_merlin(const char *func_name, int argc, char **argv)
+  char *generate_project(const char *func_name, int argc, char **argv)
   {
-    (new FileBuilder)->do_speak();
+    std::unique_ptr<FileBuilder> builder(new FileBuilder);
+
+    builder->do_speak();
     return NULL;
   }
 
   int hump_gmk_setup()
   {
-    gmk_add_function("speak", (gmk_func_ptr)generate_merlin, 1, (unsigned int)1, 1);
+    gmk_add_function("generate_project",
+		     (gmk_func_ptr)generate_project, 1, (unsigned int)1, 1);
     return 1;
   }
 

@@ -4,4 +4,4 @@
 load ../hump.so
 
 all:
-	${speak 123}
+	${generate_project 123}
