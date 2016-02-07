@@ -15,3 +15,4 @@ example:all
 
 clean:
 	@rm -rf *.{o,so}
+	@rm -rf example/.merlin

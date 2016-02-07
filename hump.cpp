@@ -6,11 +6,21 @@
 
 #include <folly/json.h>
 #include <folly/dynamic.h>
+
+#include <folly/Format.h>
 #include <folly/FileUtil.h>
+
+std::string getcwd_string(void)
+{
+   char buff[PATH_MAX];
+   getcwd(buff, PATH_MAX);
+   std::string cwd(buff);
+   return cwd;
+}
 
 class Project_builder {
 private:
-  std::string p_json;
+  folly::dynamic project_spec = nullptr;
 
 public:
   Project_builder(const std::string package_json_path)
@@ -19,16 +29,23 @@ public:
     if (!folly::readFile(package_json_path.data(), load_pkg_desc)) {
       exit(-1);
     }
-    folly::dynamic parsed = folly::parseJson(load_pkg_desc);
-
-    std::cout << "Project is: " << parsed["name"] << "\n"
-	      << "Written by: " << parsed["author"] << "\n"
-	      << std::endl;
+    project_spec = folly::parseJson(load_pkg_desc);
   }
 
   void make_merlin_file()
   {
+    std::ofstream merlin_file;
+    std::string merlin_gen_file_path =
+      folly::sformat("{}/.merlin", getcwd_string ());
 
+    merlin_file.open(merlin_gen_file_path, std::ios::out);
+    merlin_file << "PKG ";
+
+    for (auto& pkg : project_spec["dependencies"].keys()) {
+      merlin_file << pkg << " ";
+    }
+    merlin_file << std::endl;
+    merlin_file.close();
   }
 
   void make_opam_file()
