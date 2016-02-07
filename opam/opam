@@ -18,7 +18,11 @@ install:[
   ["ln" "-s" "%{etc}%/hump" "/usr/local/include/hump"]
 ]
 depexts :[
-  [["homebrew" "osx"] ["jemalloc" "lz4" "snappy" "folly"]]	
+  [["homebrew" "osx"] ["homebrew/dupes/make"
+  	       	       "jemalloc"
+		       "lz4"
+		       "snappy"
+		       "folly"]]
 ]
 remove:[
   ["rm" "%{stublibs}%/hump.so"]

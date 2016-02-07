@@ -6,6 +6,61 @@
 #+LATEX_HEADER: \usepackage[T1]{fontenc}
 #+OPTIONS:  toc:nil num:0
 
-This is a crazy idea inspired by frustrations of the current status
-quo of building OCaml. 
+*A Makefile plugin designed to help you get over the hump of OCaml
+tooling, building.*
 
+* Hump
+This is a crazy idea inspired by frustrations of the current status
+quo of building OCaml. With hump, you only need two files to get an
+OCaml project up and running: a ~package.json~ file and a
+~Makefile~. Hump provides additional builtin functions to ~make~ that
+are specific for modern OCaml tooling and take into account tools like
+~merlin~ and ~opam~.
+
+* Example
+Say your ~package.json~ looks like this:
+
+#+BEGIN_SRC javascript
+{
+    "name" : "example_project",
+    "version":"0.1.0",
+    "description":"Something to show off hump",
+    "keywords":["build", "systems"],
+    "author":{
+	"name":"Edgar Aroutiounian",
+	"email":"edgar.factorial@gmail.com"
+    },
+    "dependencies":{
+	"cmdliner":"*",
+	"lwt":"*"
+    },
+    "license":"GPL-3"
+}
+#+END_SRC
+
+then your ~Makefile~ just needs to look like this:
+
+#+BEGIN_SRC makefile
+include hump
+
+all:
+	${generate_project ./package.json}
+#+END_SRC
+
+That's literally all it takes to generate the a ~.merlin~ file.
+
+* Prerequisites
+You need to have new version of gnu-make, like 4.1. It needs to
+support loadable objects. To install ~hump~, you can do:
+
+#+BEGIN_SRC shell
+$ git clone https://github.com/fxfactorial/hump
+$ cd hump
+$ opam pin add hump . -y
+#+END_SRC
+
+And that's it, now ~hump~ will be a valid include for your Makefiles.
+
+* Issues
+Right now I am only testing this on OS X, later I will have it working
+on Linux. 
