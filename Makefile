@@ -2,14 +2,16 @@
 
 .PHONY:all clean
 
+flags := -shared -undefined dynamic_lookup -fPIC
+libs := -lc++
+src := hump.cpp
+lib := hump.so
+
 all:
-	@clang++ -shared -undefined dynamic_lookup \
-	-fPIC do_speak.cpp -o do_speak.so
+	@clang++ ${flags} ${src} ${libs} -o ${lib}
 
-load do_speak.so
-
-show_off:
-	${speak 123}
+example:all
+	@make -C example
 
 clean:
-	@rm -rf *.{cmi,cmt,cmi,cmx,o,cmo,so}
+	@rm -rf *.{o,so}
