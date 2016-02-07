@@ -4,4 +4,4 @@
 load ../hump.so
 
 all:
-	${generate_project 123}
+	${generate_project ./package.json}

@@ -1,16 +1,41 @@
 #include <cstdio>
 #include <iostream>
 #include <memory>
+#include <string>
+#include <fstream>
 
 #include <folly/json.h>
+#include <folly/dynamic.h>
+#include <folly/FileUtil.h>
 
-class FileBuilder {
+class Project_builder {
+private:
+  std::string p_json;
+
 public:
-  void do_speak()
+  Project_builder(const std::string package_json_path)
   {
-    std::string bar = "Generating Merlin";
-    std::cout << bar << std::endl;
+    std::string load_pkg_desc;
+    if (!folly::readFile(package_json_path.data(), load_pkg_desc)) {
+      exit(-1);
+    }
+    folly::dynamic parsed = folly::parseJson(load_pkg_desc);
+
+    std::cout << "Project is: " << parsed["name"] << "\n"
+	      << "Written by: " << parsed["author"] << "\n"
+	      << std::endl;
   }
+
+  void make_merlin_file()
+  {
+
+  }
+
+  void make_opam_file()
+  {
+    std::cout << "Generating Opam file" << std::endl;
+  }
+
 };
 
 extern "C" {
@@ -21,9 +46,10 @@ extern "C" {
 
   char *generate_project(const char *func_name, int argc, char **argv)
   {
-    std::unique_ptr<FileBuilder> builder(new FileBuilder);
+    std::string package_json(*argv);
+    std::unique_ptr<Project_builder> builder(new Project_builder(package_json));
 
-    builder->do_speak();
+    builder->make_merlin_file();
     return NULL;
   }
 
