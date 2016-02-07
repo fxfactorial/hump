@@ -1,0 +1,11 @@
+#+AUTHOR:   Edgar Aroutiounian
+#+EMAIL:    edgar.factorial@gmail.com
+#+LANGUAGE: en
+#+STARTUP: indent
+#+LATEX_HEADER: \usepackage{lmodern}
+#+LATEX_HEADER: \usepackage[T1]{fontenc}
+#+OPTIONS:  toc:nil num:0
+
+This is a crazy idea inspired by frustrations of the current status
+quo of building OCaml. 
+
