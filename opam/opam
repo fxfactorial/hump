@@ -13,6 +13,9 @@ build: [
 ]
 install:[
   ["cp" "hump.so" "%{stublibs}%"]
+  ["sed" "-i" "" "s|path|%{stublibs}%/hump.so|g" "hump"]
+  ["cp" "hump" "%{etc}%/hump"]
+  ["ln" "-s" "%{etc}%/hump" "/usr/local/include/hump"]
 ]
 depexts :[
   [["homebrew" "osx"] ["jemalloc" "lz4" "snappy" "folly"]]	

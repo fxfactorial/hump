@@ -1,7 +1,6 @@
 # -*- makefile -*-
 
-# Assumes you got here from the root directory's make example target
-load ../hump.so
+include hump
 
 all:
 	${generate_project ./package.json}
