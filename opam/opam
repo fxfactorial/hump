@@ -1,0 +1,22 @@
+# -*- conf -*-
+opam-version: "1.2"
+name: "hump"
+version: "0.1"
+maintainer: "Edgar Aroutiounian <edgar.factorial@gmail.com>"
+author: "Edgar Aroutiounian <edgar.factorial@gmail.com>"
+homepage: "http://hyegar.com"
+bug-reports: "https://github.com/fxfactorial/hump/issues"
+license: "GPL-3"
+dev-repo: "https://github.com/fxfactorial/hump.git"
+build: [
+  [make]
+]
+install:[
+  ["cp" "hump.so" "%{stublibs}%"]
+]
+depexts :[
+  [["homebrew" "osx"] ["jemalloc" "lz4" "snappy" "folly"]]	
+]
+remove:[
+  ["rm" "%{stublibs}%/hump.so"]
+]
