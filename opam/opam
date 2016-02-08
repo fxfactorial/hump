@@ -17,6 +17,9 @@ install:[
   ["cp" "hump" "%{etc}%/hump"]
   ["ln" "-s" "%{etc}%/hump" "/usr/local/include/hump"]
 ]
+depends:[
+  "ocamlbuild"
+]
 depexts :[
   [["homebrew" "osx"] ["homebrew/dupes/make"
   	       	       "jemalloc"
@@ -26,4 +29,5 @@ depexts :[
 ]
 remove:[
   ["rm" "%{stublibs}%/hump.so"]
+  ["rm" "/usr/local/include/hump"]
 ]

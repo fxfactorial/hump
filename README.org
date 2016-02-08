@@ -42,12 +42,16 @@ then your ~Makefile~ just needs to look like this:
 
 #+BEGIN_SRC makefile
 include hump
-
-all:
-	${generate_project ./package.json}
 #+END_SRC
 
-That's literally all it takes to generate the a ~.merlin~ file.
+and then from the command line you can do:
+
+#+BEGIN_SRC shell
+$ make generate
+#+END_SRC
+
+Yes. That's literally all it takes to generate the a ~.merlin~ and
+~opam~ file.
 
 * Prerequisites
 You need to have new version of gnu-make, like 4.1. It needs to

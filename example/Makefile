@@ -3,4 +3,4 @@
 include hump
 
 all:
-	${generate_project ./package.json}
+	${build_project ./package.json}

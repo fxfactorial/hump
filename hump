@@ -1,1 +1,6 @@
 load path
+
+.PHONY:generate
+
+generate:
+	${generate_project ./package.json}

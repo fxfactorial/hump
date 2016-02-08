@@ -50,7 +50,6 @@ public:
 
   void make_opam_file()
   {
-    std::cout << "Generating Opam file" << std::endl;
     std::ofstream opam_file;
     std::string opam_gen_file_path =
       folly::sformat("{}/opam", getcwd_string());
@@ -61,6 +60,16 @@ public:
 	      << "license: " << project_spec["license"] << "\n"
 	      << std::endl;
     opam_file.close();
+  }
+
+};
+
+class Code_builder {
+
+public:
+  Code_builder(const std::string package_json_path)
+  {
+    std::cout << "Spoken from code builder\n";
   }
 
 };
@@ -81,10 +90,20 @@ extern "C" {
     return NULL;
   }
 
+  char *build_project(const char *func_name, int argc, char **argv)
+  {
+    std::string package_json(*argv);
+    std::unique_ptr<Code_builder> builder(new Code_builder(package_json));
+
+    return NULL;
+  }
+
   int hump_gmk_setup()
   {
     gmk_add_function("generate_project",
 		     (gmk_func_ptr)generate_project, 1, (unsigned int)1, 1);
+    gmk_add_function("build_project",
+		     (gmk_func_ptr)build_project, 1, (unsigned int)1, 1);
     return 1;
   }
 
