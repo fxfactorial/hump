@@ -17,6 +17,12 @@ OCaml project up and running: a ~package.json~ file and a
 are specific for modern OCaml tooling and take into account tools like
 ~merlin~ and ~opam~.
 
+** Implementation detail
+
+It is implemented as a C++ ~gnumake~ [[https://www.gnu.org/software/make/manual/html_node/Loading-Objects.html#Loading-Objects][dynamic
+object]] and distributed via ~opam~, the ~include~ you do references
+just one ~Makefile~ on your system.
+
 * Example
 Say your ~package.json~ looks like this:
 
