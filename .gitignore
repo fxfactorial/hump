@@ -32,3 +32,4 @@
 *.dSYM/
 example/.merlin
 example/.tern-port
+example/opam

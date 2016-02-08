@@ -51,6 +51,16 @@ public:
   void make_opam_file()
   {
     std::cout << "Generating Opam file" << std::endl;
+    std::ofstream opam_file;
+    std::string opam_gen_file_path =
+      folly::sformat("{}/opam", getcwd_string());
+    opam_file.open(opam_gen_file_path, std::ios::out);
+    opam_file << "opam-version: \"1.2\"" << "\n"
+	      << "name: " << project_spec["name"] << "\n"
+	      << "version: " << project_spec["version"] << "\n"
+	      << "license: " << project_spec["license"] << "\n"
+	      << std::endl;
+    opam_file.close();
   }
 
 };
@@ -67,6 +77,7 @@ extern "C" {
     std::unique_ptr<Project_builder> builder(new Project_builder(package_json));
 
     builder->make_merlin_file();
+    builder->make_opam_file();
     return NULL;
   }
 
